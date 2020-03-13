@@ -29,7 +29,7 @@ The endpoints you will need are:
 
 As a user, I can:
 
-- See the first beer's (id: 1) details, including its **name, image, description, and reviews**, when the page loads
+- See the first beer's details, including its **name, image, description, and reviews**, when the page loads
 - Change the beer's description and still see that change when reloading the page
 - Add a review for the beer (no persistence needed)
 
