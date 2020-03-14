@@ -5,7 +5,6 @@ Today you'll be building an app for viewing and editing beers. You will be using
 ## Demo
 
 Use this gif as an example of how the app should work.
-### REPLACE THE GIF!!
 
 ![demo gif](assets/demo.gif)
 
