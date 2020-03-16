@@ -42,7 +42,7 @@ As a user, I can:
 
 - Still see the review after refreshing the page
 - Delete a review
-- See a menu of all beers on the left side of the page - clicking a beer's name replaces the currently displayed beer's details with the details of the beer I clicked on
+- See a menu of all beers on the left side of the page - clicking a beer's name replaces the currently displayed beer's details with the details of the beer I clicked on (it's OK if the update beer description and add review buttons still persist data to the first beer instead of the selected beer)
 
 ## Rubric
 
