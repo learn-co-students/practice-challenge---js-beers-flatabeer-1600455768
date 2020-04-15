@@ -1,120 +1,83 @@
-# Module 3 JS Code Challenge
+# FlataBeer
 
-## Objectives
+Today you'll be building an app for viewing and editing beers. You will be using a local API and building out the frontend for our app, FlataBeer.
 
-- DOM Manipulation
-- Events and Event Handlers
-- Callbacks
-- ES6 Classes
-- Fetching from APIs
+## Demo
 
-## Instructions
+Use this gif as an example of how the app should work.
 
-For this code challenge, you will be building a **[Master Detail Interface](Master-Detail.png)**
+![demo gif](assets/demo.gif)
 
-This is a very common pattern that you have definitely seen before. Often on the side of the screen, you will see a list of "all things" (think all Messages) that will contain some information about each message (sender and first few lines of message), but not all of the information that message contains.
+## Setup
 
-By clicking one particular message on the master list, the application will show more information about that particular message.
+- Fork and clone this repository
+- Run `json-server --watch db.json` to get the backend started
+- Open `index.html` in your browser
 
-#### Today, you will be building a Beer App 🍺🍺🍺
+## Endpoints
 
--- As a user, when the page loads, I should see a list of beer names retrieved from an API on the left hand side of the screen.
+Your base URL for your API will be: http://localhost:3000
 
--- As a user, when I click a beer name, the application should reveal more information about that particular beer.
+The endpoints you will need are:
 
--- As a user, when looking at the details of a beer, I can edit the current description of a beer. Clicking the 'Save' button will save any changes added to the description in the database
+- GET `/beers/[:id]`
+- PATCH `/beers/[:id]`
+- GET `/beers` (for Advanced Deliverables only)
 
-![beer gif](code-challenge-mod-iii-round-ii.gif)
+## Core Deliverables
 
-## The API
+As a user, I can:
 
-Instead of actually accessing the data from a remote API, this challenge uses a package called [json-server](https://github.com/typicode/json-server) to create a fake API for development and testing.
+- See the first beer's details, including its **name, image, description, and reviews**, when the page loads
+- Change the beer's description and **still see that change when reloading the page**
+- Add a review for the beer (no persistence needed)
 
-It is very easy to set-up.
+## Advanced Deliverables
 
-1 - Run the command `npm install -g json-server` in the command line from this directory
+These deliverables are not required to pass the code challenge, but if you have the extra time, or even after the code challenge, they are a great way to stretch your skills. Consider refactoring your current code before moving on.
 
-2 - Run  `json-server --watch db.json`
+> Note: If you are going to attempt these advanced deliverables, please be sure to have a working commit with all the Core Deliverables first!
 
-That's it. You will have a server running on `localhost:3000` that serves the JSON data contained in the `db.json` file.
+As a user, I can:
 
-*Troubleshooting: If this fails, be sure you don't already have something running on port 3000*
+- Still see the review after refreshing the page
+- Delete a review
+- See a menu of all beers on the left side of the page - clicking a beer's name replaces the currently displayed beer's details with the details of the beer I clicked on (it's OK if the update beer description and add review buttons still persist data to the first beer instead of the selected beer)
 
-## Deliverables and How to Approach
+## Rubric
 
-For this challenge, it is important to work iteratively, one feature at a time, before moving on to the next. You should **prioritize making code that works over attempting all of the deliverables.**
+### DOM Manipulation
 
-### Step 1 - Display All Beer Names
+1. Did not properly render elements to the DOM.
 
-When the page loads, I should see a list of all of the beer names retrieved from the API on the left hand side of the screen. The API endpoint we need to retrieve all the beers is a conventional RESTful route
+2. Rendered elements to the DOM, but with some errors.
 
-* **Route:** GET `http://localhost:3000/beers`
+3. Successfully rendered and updated the DOM as described by the Core Deliverables.
 
-#### Styling
+4. Structured HTML creation code cleanly and in a reusable way, using a semantically correct HTML structure without any unnecessary elements.
 
-[Bootstrap](https://getbootstrap.com/docs/3.3/components/#list-group) is loaded into this project via a link tag in the head of the html. Generally, do not worry about styling in this application.
+5. All of the above, plus completed at least one Advanced Deliverable.
 
-**One important point** is that for the beer names to show up correctly, the html should have the following class names:
+### Events
 
-```html
-<ul class="list-group">
-  <li class="list-group-item">Beer title 1</li>
-  <li class="list-group-item">Beer title 2</li>
-  /* etc... */
-</ul>
-```
+1. Did not attach event listeners to respond to events.
 
-### Step 2 - Display Single Beer Details
+2. Attached event listeners, but incompletely or with some errors.
 
-When I click a beer name, the application should reveal more information about that particular beer.
-See the example above for the additional information that should be displayed.
+3. Successfully attached event listeners to handle DOM events and met all of the Core Deliverables.
 
-* **Route:** GET `http://localhost:3000/beers/:id`
+4. Structured code in a clean and reusable way, splitting functions, using descriptive names and using target properties effectively.
 
-The beer details should be added to this div
+5. All of the above, plus completed at least one Advanced Deliverable.
 
-```html
-<div id="beer-detail">
+### Communication with the Server
 
-</div>
-```
-The html should look something like:
+1. Unable to communicate with the server.
 
-```html
-<h1>Beer Name</h1>
-<img src="<add beer img url here>">
-<h3>Beer Tagline</h3>
-<textarea>Beer Description</textarea>
-<button id="edit-beer" class="btn btn-info">
-  Save
-</button>
-```
+2. Partially able to communicate with the server, but incompletely or with some errors.
 
-### Step 3 - Edit Beer Details
+3. Able to perform a GET and a non-GET request successfully. All Core Deliverables met.
 
-When looking at the details of a beer, I can edit the current description of a beer. Clicking the 'Save' button will save any changes added to the description in the database. The edited beer should also update the DOM. For example, if I update the details of "Beer A" then click on another beer, when I go back to "Beer A", the description should be updated.
+4. Code structured in a clean and reusable way, splitting into functions and reusing them where needed, with clear function and variable naming.
 
-To update a beer you'll need to make a PATCH request
-* **Route:** PATCH `http://localhost:3000/beers/:id`
-* **Body:**
-```js
-  {description: "your new description"}
-```
-* **Headers:**
-```js
-  {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  }
-  ```
-
-  **Important Notes:**
-  * For all intents and purposes, PATCH behaves the same as POST. If you know how to POST, you know how to PATCH
-  * When using `fetch` to make a PATCH request, be sure to capitalize method: 'PATCH'
-
-
-## Considerations
-
-You are free to solve this in any way you choose. It is not required that you have ES6 classes or use Object Orientation. We would recommend beginning with a straightforward functional implementation and refactoring to objects as needed.
-
-When you click on an individual `<li>` you will need some way of determining which particular beer was clicked on. How will you solve this problem?
+5. All of the above, plus completed at least one Advanced Deliverable.
