@@ -20,7 +20,7 @@ Your base URL for your API will be: http://localhost:3000
 
 The endpoints you will need are:
 
-- GET `/beers/[:id]`
+- GET `/beers/[:id]` (start with /beers/1)
 - PATCH `/beers/[:id]`
 - GET `/beers` (for Advanced Deliverables only)
 
