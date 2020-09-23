@@ -1,23 +1,24 @@
+const beerDetails = document.querySelector(".beer-details")
 const beerName = document.querySelector(".beer-details").firstElementChild
 const beerPic = document.querySelector(".beer-details").firstElementChild.nextElementSibling
 const formDesc = document.querySelector(".description")
+const textarea = document.querySelector(".description-textarea")
 const button = document.getElementsByTagName("button")
 const reviewForm = document.querySelector(".review-form")
 const reviews = document.querySelector(".reviews")
 
 document.addEventListener("DOMContentLoaded", () => fetchbeer())
 
+
 function fetchbeer() {
-    fetch("http://localhost:3000/beers/1")
-        .then(response => response.json())
-        .then(beer => renderBeer(beer))
+    ApiService.getBeer(1).then(beer => new Beer(beer))
 }
 
 function renderBeer(beer) {
-
+    beerDetails.dataset.id = beer.id
     beerName.innerHTML = beer.name
     beerPic.src = beer.image_url
-
+    textarea.innerText = beer.description
     //create comment li and append to reviews
     const comment = document.createElement('li')
     reviews.appendChild(comment)
@@ -33,16 +34,15 @@ function renderBeer(beer) {
             reviews: reviewForm.firstElementChild.value
         }
 
-        fetch(`http://localhost:3000/beers/${beer.id}`, {
-                method: 'PATCH', // or 'PUT'
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
+        // fetch(`http://localhost:3000/beers/${beer.id}`, {
+        //         method: 'PATCH', // or 'PUT'
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(data),
+        //     })
+        //     .then(response => response.json())
             .then(beer => {
-
                 comment.innerText = `${beer.reviews}`
                     // reviews.appendChild(comment)
 
@@ -51,7 +51,31 @@ function renderBeer(beer) {
 
 }
 
-formDesc.lastElementChild.addEventListener("click", function(e) {
-    e.preventDefault()
-        // formDesc.firstElementChild.innerHTML
-})
+// formDesc.lastElementChild.addEventListener("click", function(e) {
+//     e.preventDefault()
+
+//     const beerDiv = formDesc.parentElement
+//     const beerId = beerDiv.dataset.id
+//     const description = textarea.value 
+  
+//         const data = {
+    
+//             description: description
+    
+//         }
+
+//         fetch(`http://localhost:3000/beers/${beerId}`, {
+//                 method: 'PATCH', // or 'PUT'
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify(data),
+//             })
+//             .then(response => response.json())
+//             .then(beer => {
+                
+//                 textarea.innerText = `${beer.description}`
+//                     // reviews.appendChild(comment)
+
+//             })
+//     })
